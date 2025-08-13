@@ -1,0 +1,127 @@
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - /url: https://www.orangehrm.com/
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin":
+          - /url: /web/index.php/admin/viewAdminModule
+      - listitem:
+        - link "PIM":
+          - /url: /web/index.php/pim/viewPimModule
+      - listitem:
+        - link "Leave":
+          - /url: /web/index.php/leave/viewLeaveModule
+      - listitem:
+        - link "Time":
+          - /url: /web/index.php/time/viewTimeModule
+      - listitem:
+        - link "Recruitment":
+          - /url: /web/index.php/recruitment/viewRecruitmentModule
+      - listitem:
+        - link "My Info":
+          - /url: /web/index.php/pim/viewMyDetails
+      - listitem:
+        - link "Performance":
+          - /url: /web/index.php/performance/viewPerformanceModule
+      - listitem:
+        - link "Dashboard":
+          - /url: /web/index.php/dashboard/index
+      - listitem:
+        - link "Directory":
+          - /url: /web/index.php/directory/viewDirectory
+      - listitem:
+        - link "Maintenance":
+          - /url: /web/index.php/maintenance/viewMaintenanceModule
+      - listitem:
+        - link "Claim":
+          - /url: /web/index.php/claim/viewClaimModule
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz":
+          - /url: /web/index.php/buzz/viewBuzz
+- banner:
+  - heading "Admin" [level=6]
+  - heading "/ Qualifications" [level=6]
+  - link "Upgrade":
+    - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: Param1 Patel
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - listitem: User Management 
+      - listitem: Job 
+      - listitem: Organization 
+      - listitem: Qualifications 
+      - listitem:
+        - link "Nationalities":
+          - /url: "#"
+      - listitem:
+        - link "Corporate Branding":
+          - /url: "#"
+      - listitem: Configuration 
+      - button ""
+- heading "Education" [level=6]
+- button " Add"
+- separator
+- text: (4) Records Found
+- table:
+  - rowgroup:
+    - row " Level Actions":
+      - columnheader "":
+        - checkbox ""
+        - text: 
+      - columnheader "Level"
+      - columnheader "Actions"
+  - rowgroup:
+    - row " Bachelor's Degree  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Bachelor's Degree"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " College Undergraduate  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "College Undergraduate"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " High School Diploma  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "High School Diploma"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Master's Degree  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Master's Degree"
+      - cell " ":
+        - button ""
+        - button ""
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+```

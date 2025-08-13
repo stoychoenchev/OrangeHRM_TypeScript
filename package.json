@@ -11,9 +11,10 @@
   "description": "Test Automation Framework for OrangeHRM built with JavaScript and Playwright.",
   "devDependencies": {
     "@cucumber/cucumber": "^11.2.0",
-    "@playwright/test": "^1.53.1",
+    "@playwright/test": "^1.54.2",
     "@types/node": "^22.9.0",
-    "allure-playwright": "^3.2.1"
+    "allure-playwright": "^3.2.1",
+    "typescript": "^5.9.2"
   },
   "directories": {
     "test": "tests"

@@ -1,0 +1,120 @@
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - /url: https://www.orangehrm.com/
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin":
+          - /url: /web/index.php/admin/viewAdminModule
+      - listitem:
+        - link "PIM":
+          - /url: /web/index.php/pim/viewPimModule
+      - listitem:
+        - link "Leave":
+          - /url: /web/index.php/leave/viewLeaveModule
+      - listitem:
+        - link "Time":
+          - /url: /web/index.php/time/viewTimeModule
+      - listitem:
+        - link "Recruitment":
+          - /url: /web/index.php/recruitment/viewRecruitmentModule
+      - listitem:
+        - link "My Info":
+          - /url: /web/index.php/pim/viewMyDetails
+      - listitem:
+        - link "Performance":
+          - /url: /web/index.php/performance/viewPerformanceModule
+      - listitem:
+        - link "Dashboard":
+          - /url: /web/index.php/dashboard/index
+      - listitem:
+        - link "Directory":
+          - /url: /web/index.php/directory/viewDirectory
+      - listitem:
+        - link "Maintenance":
+          - /url: /web/index.php/maintenance/viewMaintenanceModule
+      - listitem:
+        - link "Claim":
+          - /url: /web/index.php/claim/viewClaimModule
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz":
+          - /url: /web/index.php/buzz/viewBuzz
+- banner:
+  - heading "Admin" [level=6]
+  - heading "/ Job" [level=6]
+  - link "Upgrade":
+    - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: Param1 Patel
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - listitem: User Management 
+      - listitem: Job 
+      - listitem: Organization 
+      - listitem: Qualifications 
+      - listitem:
+        - link "Nationalities":
+          - /url: "#"
+      - listitem:
+        - link "Corporate Branding":
+          - /url: "#"
+      - listitem: Configuration 
+      - button ""
+- heading "Work Shifts" [level=6]
+- button " Add"
+- separator
+- text: (2) Records Found
+- table:
+  - rowgroup:
+    - row " Name From To Hours Per Day Actions":
+      - columnheader "":
+        - checkbox ""
+        - text: 
+      - columnheader "Name"
+      - columnheader "From"
+      - columnheader "To"
+      - columnheader "Hours Per Day"
+      - columnheader "Actions"
+  - rowgroup:
+    - row " General 08:00 AM 05:00 PM 9.00  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "General"
+      - cell "08:00 AM"
+      - cell "05:00 PM"
+      - cell "9.00"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Twilight 02:00 PM 11:00 PM 9.00  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Twilight"
+      - cell "02:00 PM"
+      - cell "11:00 PM"
+      - cell "9.00"
+      - cell " ":
+        - button ""
+        - button ""
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+```

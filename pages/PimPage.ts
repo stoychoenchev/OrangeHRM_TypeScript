@@ -21,7 +21,10 @@ export class PimPage {
     addButton: Locator;
     nameField: Locator;
     terminationSaveButton: Locator;
-    successButton: Locator; 
+    successButton: Locator;
+    terminationReason: Locator;
+    deleteButton: Locator;
+    successDelete: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -47,6 +50,10 @@ export class PimPage {
         this.nameField = page.locator('form').getByRole('textbox');
         this.terminationSaveButton = page.getByRole('button', { name: ' Save ' });
         this.successButton = page.getByText('SuccessSuccessfully Saved×');
+        this.terminationReason = page.getByRole('row', { name: ' Test_Termination  ' }).getByRole('button').first();
+        this.deleteButton = page.getByRole('button', { name: ' Yes, Delete' });
+        this.successDelete = page.getByText('SuccessSuccessfully Deleted×');
+        
     }
 
     async navigateToPimPage(): Promise<void> {
@@ -54,13 +61,22 @@ export class PimPage {
         await this.page.waitForLoadState('networkidle');
     }
 
-    async addTerminationReason(reason: string = 'Test Reason'): Promise<void> {
-        await this.configurationButton.click();
-        await this.terminationReasonsButton.click();
-        await this.addButton.click();
-        await this.nameField.fill(reason);
-        await this.terminationSaveButton.click();
+    async navigateToTerminationReasons(): Promise<void> {
+          await this.page.goto("http://localhost/orangehrm/orangehrm-5.7/web/index.php/pim/viewTerminationReasons")
     }
+    async deleteTerminationReason(): Promise<void> {
+    await this.terminationReason.click();
+    await this.deleteButton.click();
+    }
+    async addTerminationReason(reason?: string): Promise<void> {
+    const uniqueReason = reason ?? this.generateShortString('Termination_', 20);
+    await this.configurationButton.click();
+    await this.terminationReasonsButton.click();
+    await this.addButton.click();
+    await this.nameField.fill(uniqueReason);
+    await this.terminationSaveButton.click();
+}
+    
 
     async PimPageAddEmployee(
     firstName: string = "UI",

@@ -1,4 +1,4 @@
-import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
+import { Given, When, Then, setDefaultTimeout, Before, After } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { chromium } from '@playwright/test';
 import type { Browser, Page } from '@playwright/test';
@@ -9,26 +9,32 @@ let browser: Browser;
 let page: Page;
 let pimPage: PimPage;
 let loginPage: LoginPage;
+
 setDefaultTimeout(60 * 1000);
 
-Given('Admin is on Termination Reasons', async function () {
+Before(async function () {
   browser = await chromium.launch({ headless: false });
   page = await browser.newPage();
-  pimPage = new PimPage(page); 
   loginPage = new LoginPage(page);
   await loginPage.navigateToPage();
   await loginPage.login();
+  pimPage = new PimPage(page);
+});
+
+After(async function () {
+  if (browser) {
+    await browser.close();
+  }
+});
+
+Given('Admin is on Termination Reasons', async function () {
   await pimPage.navigateToPimPage();
 });
 
 When('Admin adds a new Termination Reason', async function () {
-      pimPage = new PimPage(page); 
-
-    await pimPage.addTerminationReason();
+  await pimPage.addTerminationReason();
 });
 
 Then('the termination reason is created successfully', async function () {
-  pimPage = new PimPage(page); 
   await expect(pimPage.successButton).toBeVisible();
-  await browser.close();
 });

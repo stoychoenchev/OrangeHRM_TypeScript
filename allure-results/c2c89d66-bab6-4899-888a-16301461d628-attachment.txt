@@ -1,0 +1,2 @@
+Job Categories: The counts match!
+true

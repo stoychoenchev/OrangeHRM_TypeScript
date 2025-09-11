@@ -1,0 +1,167 @@
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - /url: https://www.orangehrm.com/
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin":
+          - /url: /web/index.php/admin/viewAdminModule
+      - listitem:
+        - link "PIM":
+          - /url: /web/index.php/pim/viewPimModule
+      - listitem:
+        - link "Leave":
+          - /url: /web/index.php/leave/viewLeaveModule
+      - listitem:
+        - link "Time":
+          - /url: /web/index.php/time/viewTimeModule
+      - listitem:
+        - link "Recruitment":
+          - /url: /web/index.php/recruitment/viewRecruitmentModule
+      - listitem:
+        - link "My Info":
+          - /url: /web/index.php/pim/viewMyDetails
+      - listitem:
+        - link "Performance":
+          - /url: /web/index.php/performance/viewPerformanceModule
+      - listitem:
+        - link "Dashboard":
+          - /url: /web/index.php/dashboard/index
+      - listitem:
+        - link "Directory":
+          - /url: /web/index.php/directory/viewDirectory
+      - listitem:
+        - link "Maintenance":
+          - /url: /web/index.php/maintenance/viewMaintenanceModule
+      - listitem:
+        - link "Claim":
+          - /url: /web/index.php/claim/viewClaimModule
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz":
+          - /url: /web/index.php/buzz/viewBuzz
+- banner:
+  - heading "Admin" [level=6]
+  - heading "/ Job" [level=6]
+  - link "Upgrade":
+    - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: Sanku Kumar
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - listitem: User Management 
+      - listitem: Job 
+      - listitem: Organization 
+      - listitem: Qualifications 
+      - listitem:
+        - link "Nationalities":
+          - /url: "#"
+      - listitem:
+        - link "Corporate Branding":
+          - /url: "#"
+      - listitem: Configuration 
+      - button ""
+- heading "Job Categories" [level=6]
+- button " Add"
+- separator
+- text: (9) Records Found
+- table:
+  - rowgroup:
+    - row " Job Category Actions":
+      - columnheader "":
+        - checkbox ""
+        - text: 
+      - columnheader "Job Category"
+      - columnheader "Actions"
+  - rowgroup:
+    - row " Craft Workers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Craft Workers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Laborers and Helpers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Laborers and Helpers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Office and Clerical Workers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Office and Clerical Workers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Officials and Managers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Officials and Managers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Operatives  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Operatives"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Professionals  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Professionals"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Sales Workers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Sales Workers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Service Workers  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Service Workers"
+      - cell " ":
+        - button ""
+        - button ""
+    - row " Technicians  ":
+      - cell "":
+        - checkbox ""
+        - text: 
+      - cell "Technicians"
+      - cell " ":
+        - button ""
+        - button ""
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+```

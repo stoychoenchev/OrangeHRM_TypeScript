@@ -1,0 +1,38 @@
+{
+  data: [
+    {
+      empNumber: 1,
+      lastName: 'Enchev',
+      firstName: 'Stoycho',
+      middleName: '',
+      employeeId: '0001',
+      terminationId: null
+    },
+    {
+      empNumber: 45,
+      lastName: 'Jones',
+      firstName: 'Emily',
+      middleName: 'B',
+      employeeId: '54321',
+      terminationId: null
+    },
+    {
+      empNumber: 44,
+      lastName: 'Smith',
+      firstName: 'John',
+      middleName: 'A',
+      employeeId: '12345',
+      terminationId: null
+    },
+    {
+      empNumber: 43,
+      lastName: 'Testov',
+      firstName: 'Boban',
+      middleName: 'Zdrakov',
+      employeeId: '0043',
+      terminationId: null
+    }
+  ],
+  meta: { total: 4 },
+  rels: []
+}

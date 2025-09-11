@@ -16,6 +16,12 @@ export class PimPage {
     employeeName: Locator;
     employeeNameFilled: Locator;
     searchButton: Locator;
+    configurationButton: Locator;
+    terminationReasonsButton: Locator;
+    addButton: Locator;
+    nameField: Locator;
+    terminationSaveButton: Locator;
+    successButton: Locator; 
 
     constructor(page: Page) {
         this.page = page;
@@ -35,6 +41,12 @@ export class PimPage {
         this.employeeName = page.getByPlaceholder('Type for hints...');
         this.employeeNameFilled = page.getByRole('option').first();
         this.searchButton = page.getByRole('button', { name: 'Search' });
+        this.configurationButton = page.getByRole('listitem').filter({ hasText: 'Configuration' });
+        this.terminationReasonsButton = page.getByRole('menuitem', { name: 'Termination Reasons' });
+        this.addButton = page.getByRole('button', { name: ' Add' });
+        this.nameField = page.locator('form').getByRole('textbox');
+        this.terminationSaveButton = page.getByRole('button', { name: ' Save ' });
+        this.successButton = page.getByText('SuccessSuccessfully Saved×');
     }
 
     async navigateToPimPage(): Promise<void> {
@@ -42,15 +54,29 @@ export class PimPage {
         await this.page.waitForLoadState('networkidle');
     }
 
-    async PimPageAddEmployee(): Promise<void> {
-        const uniqueId = `ID${Date.now().toString().slice(-5)}`;
-        await this.pimAddbutton.click();
-        await this.pimFirstNameField.fill("Koko");
-        await this.pimMiddleNameField.fill("Koko");
-        await this.pimLastNameField.fill("Koko");
-        await this.employeeId.fill(uniqueId);
-        await this.pimSaveButton.click();
+    async addTerminationReason(reason: string = 'Test Reason'): Promise<void> {
+        await this.configurationButton.click();
+        await this.terminationReasonsButton.click();
+        await this.addButton.click();
+        await this.nameField.fill(reason);
+        await this.terminationSaveButton.click();
     }
+
+    async PimPageAddEmployee(
+    firstName: string = "UI",
+    middleName: string = "UIev",
+    lastName: string = "UIeeevv",
+    employeeId?: string
+): Promise<void> {
+    const uniqueId = employeeId ?? `ID${Date.now().toString().slice(-5)}`;
+    await this.pimAddbutton.click();
+    await this.pimFirstNameField.fill(firstName);
+    await this.pimMiddleNameField.fill(middleName);
+    await this.pimLastNameField.fill(lastName);
+    await this.employeeId.fill(uniqueId);
+    await this.pimSaveButton.click();
+}
+
 
     async searchForUserRole(): Promise<Locator> {
         await this.navigateToPimPage();
@@ -59,7 +85,7 @@ export class PimPage {
         return this.matchedName;
     }
 
-    async searchForEmployee(employeeName: string = 'A', newFirstName: string = 'AaaTestUpdatePlay531'): Promise<void> {
+    async searchAndEditForEmployee(employeeName: string = 'Api Apiev', newFirstName: string = 'EditApi'): Promise<void> {
         await this.navigateToPimPage();
         await this.employeeName.first().click();
         await this.employeeName.first().fill(employeeName);
@@ -72,5 +98,27 @@ export class PimPage {
         await this.page.getByPlaceholder('First Name').click();
         await this.page.getByPlaceholder('First Name').fill(newFirstName);
         await this.page.locator("//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' oxd-button--secondary ') and (position() = 2)]").click({ timeout: 5000 });
+    }
+
+    async searchAndDeleteForEmployee(employeeName: string = 'EditApi'): Promise<void> {
+        await this.navigateToPimPage();
+        await this.employeeName.first().click();
+        await this.employeeName.first().fill(employeeName);
+        await this.page.waitForTimeout(5000);
+        await this.employeeNameFilled.click();
+        await this.searchButton.click();
+        const row = this.page.locator(`div.oxd-table-row:has-text("${employeeName}")`);
+        const editButton = row.locator('i.oxd-icon.bi-trash');
+        await editButton.first().click();
+        await this.page.locator('//button[normalize-space()="Yes, Delete"]').click();
+    }
+
+    generateShortString(prefix: string, maxLength: number): string {
+        const unique = Date.now().toString().slice(-6) + Math.floor(Math.random() * 1000);
+        return (prefix + unique).slice(0, maxLength);
+    }
+
+    generateEmployeeId(): string {
+        return 'ID' + Math.random().toString(36).substring(2, 8).toUpperCase();
     }
 }

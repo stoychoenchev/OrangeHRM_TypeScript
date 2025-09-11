@@ -111,14 +111,14 @@ export class AdminPage {
         await this.addButton.click();
         await this.formI.click();
         await this.formIOption.click();
-        await this.typeForHints.fill('A');
+        await this.typeForHints.fill('Stoycho');
         await this.page.waitForTimeout(5000);
         await this.typeForHintsOption.click();
         await this.formIsecond.click();
         await this.formEnabled.click();
         await this.usernameBox.fill(uniqueUsername);
-        await this.passwordBox.fill('parola123');
-        await this.passwordBoxRepat.fill('parola123');
+        await this.passwordBox.fill('Naislojnata_Parola13.');
+        await this.passwordBoxRepat.fill('Naislojnata_Parola13.');
         await this.saveButton.click();
     }
     async searchForUserRole(): Promise<void> {
@@ -154,7 +154,7 @@ export class AdminPage {
             console.log('Rows or Records Found Text is null.');
         }
     }
-    async checkJobTitlesRecords(): Promise<void> {
+    async checkJobTitlesRecords(): Promise<boolean> {
         await this.navigateToAdminPage();
         await this.jobButton.click();
         await this.jobButtonListedItem1.click();
@@ -165,162 +165,228 @@ export class AdminPage {
         const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
         const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
         if (itemCount === recordsFoundCount) {
+            console.log('Job titles are: ' + itemCount);
             console.log('Job Titles: The counts match!');
+            return true;
         } else {
             console.log(`Job Titles: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+            return false;
         }
     }
 
-    async checkPayGradesRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.jobButton.click();
-        await this.jobButtonListedItem2.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Pay Grades: The counts match!');
-        } else {
-            console.log(`Pay Grades: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkPayGradesRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.jobButton.click();
+            await this.jobButtonListedItem2.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Pay Grades: The counts match!');
+                return true;
+            } else {
+                console.log(`Pay Grades: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkPayGradesRecords:', error);
+            return false;
         }
     }
 
-    async checkEmploymentStatusRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.jobButton.click();
-        await this.jobButtonListedItem3.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Employment Status: The counts match!');
-        } else {
-            console.log(`Employment Status: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkEmploymentStatusRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.jobButton.click();
+            await this.jobButtonListedItem3.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Employment Status: The counts match!');
+                return true;
+            } else {
+                console.log(`Employment Status: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkEmploymentStatusRecords:', error);
+            return false;
         }
     }
 
-    async checkJobCategoriesRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.jobButton.click();
-        await this.jobButtonListedItem4.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Job Categories: The counts match!');
-        } else {
-            console.log(`Job Categories: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkJobCategoriesRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.jobButton.click();
+            await this.jobButtonListedItem4.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Job Categories: The counts match!');
+                return true;
+            } else {
+                console.log(`Job Categories: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkJobCategoriesRecords:', error);
+            return false;
         }
     }
 
-    async checkWorkShiftsRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.jobButton.click();
-        await this.jobButtonListedItem5.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Work Shifts: The counts match!');
-        } else {
-            console.log(`Work Shifts: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkWorkShiftsRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.jobButton.click();
+            await this.jobButtonListedItem5.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Work Shifts: The counts match!');
+                return true;
+            } else {
+                console.log(`Work Shifts: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkWorkShiftsRecords:', error);
+            return false;
         }
     }
 
-    async checkSkillsRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.qualificationsButton.click();
-        await this.qualificationsButtonListedItem1.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Skills: The counts match!');
-        } else {
-            console.log(`Skills: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkSkillsRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.qualificationsButton.click();
+            await this.qualificationsButtonListedItem1.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Skills: The counts match!');
+                return true;
+            } else {
+                console.log(`Skills: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkSkillsRecords:', error);
+            return false;
         }
     }
 
-    async checkEducationRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.qualificationsButton.click();
-        await this.qualificationsButtonListedItem2.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Education: The counts match!');
-        } else {
-            console.log(`Education: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkEducationRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.qualificationsButton.click();
+            await this.qualificationsButtonListedItem2.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Education: The counts match!');
+                return true;
+            } else {
+                console.log(`Education: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkEducationRecords:', error);
+            return false;
         }
     }
 
-    async checkLicensesRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.qualificationsButton.click();
-        await this.qualificationsButtonListedItem3.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Licenses: The counts match!');
-        } else {
-            console.log(`Licenses: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkLicensesRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.qualificationsButton.click();
+            await this.qualificationsButtonListedItem3.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Licenses: The counts match!');
+                return true;
+            } else {
+                console.log(`Licenses: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkLicensesRecords:', error);
+            return false;
         }
     }
 
-    async checkLanguagesRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.qualificationsButton.click();
-        await this.qualificationsButtonListedItem4.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Languages: The counts match!');
-        } else {
-            console.log(`Languages: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkLanguagesRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.qualificationsButton.click();
+            await this.qualificationsButtonListedItem4.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Languages: The counts match!');
+                return true;
+            } else {
+                console.log(`Languages: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkLanguagesRecords:', error);
+            return false;
         }
     }
 
-    async checkMembershipsRecords(): Promise<void> {
-        await this.navigateToAdminPage();
-        await this.qualificationsButton.click();
-        await this.qualificationsButtonListedItem5.click();
-        await this.page.waitForSelector(this.containerLocator);
-        const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
-        const recordsFoundText = await this.page.getByText('Records Found').textContent();
-        const itemCount = rowsArray.length - 1;
-        const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
-        const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
-        if (itemCount === recordsFoundCount) {
-            console.log('Memberships: The counts match!');
-        } else {
-            console.log(`Memberships: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+    async checkMembershipsRecords(): Promise<boolean> {
+        try {
+            await this.navigateToAdminPage();
+            await this.qualificationsButton.click();
+            await this.qualificationsButtonListedItem5.click();
+            await this.page.waitForSelector(this.containerLocator);
+            const rowsArray = await this.page.locator(this.containerLocator).allTextContents();
+            const recordsFoundText = await this.page.getByText('Records Found').textContent();
+            const itemCount = rowsArray.length - 1;
+            const match = recordsFoundText ? recordsFoundText.match(/\d+/) : null;
+            const recordsFoundCount = match ? parseInt(match[0], 10) : 0;
+            if (itemCount === recordsFoundCount) {
+                console.log('Memberships: The counts match!');
+                return true;
+            } else {
+                console.log(`Memberships: Mismatch - Found ${itemCount} items, but records indicate ${recordsFoundCount}`);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error in checkMembershipsRecords:', error);
+            return false;
         }
     }
 }

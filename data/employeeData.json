@@ -1,0 +1,15 @@
+{
+  "add": {
+    "firstName": "John",
+    "middleName": "A",
+    "lastName": "Doe",
+    "employeeId": "ID123456"
+  },
+  "edit": {
+    "searchName": "John",
+    "newFirstName": "Johnny"
+  },
+  "delete": {
+    "searchName": "Johnny"
+  }
+}

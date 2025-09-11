@@ -36,8 +36,6 @@ export class RecruitPage {
         await this.firstNameField.fill('Stoycho');
         await this.middleNameField.fill('Tarkanaev');
         await this.lastNameField.fill('Tainov');
-        await this.vacancyDropDown.click();
-        await this.seniorQaOption.click();
         await this.emailField.fill('abekvomepitash@abv.bg');
         await this.saveButton.click();
     }

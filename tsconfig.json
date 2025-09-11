@@ -9,6 +9,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "verbatimModuleSyntax": true,
     "types": ["node", "@playwright/test"], // <-- Updated types
     // For nodejs:
     // "lib": ["esnext"],
@@ -35,12 +36,10 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "moduleResolution": "node", // <-- Added for module resolution
     "esModuleInterop": true     // <-- Added for ES module
   }
 }

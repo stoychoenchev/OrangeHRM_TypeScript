@@ -1,0 +1,30 @@
+{
+  data: [
+    {
+      empNumber: 38,
+      lastName: 'Doe303516',
+      firstName: 'Johnny303516',
+      middleName: 'A303516',
+      employeeId: 'ID303516',
+      terminationId: null
+    },
+    {
+      empNumber: 37,
+      lastName: 'Doe303847',
+      firstName: 'John303847',
+      middleName: 'A303847',
+      employeeId: 'ID303847',
+      terminationId: null
+    },
+    {
+      empNumber: 1,
+      lastName: 'Enchev',
+      firstName: 'Stoycho',
+      middleName: '',
+      employeeId: '0001',
+      terminationId: null
+    }
+  ],
+  meta: { total: 3 },
+  rels: []
+}

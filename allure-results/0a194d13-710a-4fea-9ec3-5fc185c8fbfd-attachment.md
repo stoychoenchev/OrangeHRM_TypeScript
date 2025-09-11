@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - /url: https://www.orangehrm.com/
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/admin/viewAdminModule
+      - listitem:
+        - link "PIM":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/pim/viewPimModule
+      - listitem:
+        - link "Leave":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/leave/viewLeaveModule
+      - listitem:
+        - link "Time":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/time/viewTimeModule
+      - listitem:
+        - link "Recruitment":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/recruitment/viewRecruitmentModule
+      - listitem:
+        - link "My Info":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/pim/viewMyDetails
+      - listitem:
+        - link "Performance":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/performance/viewPerformanceModule
+      - listitem:
+        - link "Dashboard":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/dashboard/index
+      - listitem:
+        - link "Directory":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/directory/viewDirectory
+      - listitem:
+        - link "Maintenance":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/maintenance/viewMaintenanceModule
+      - listitem:
+        - link "Claim":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/claim/viewClaimModule
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz":
+          - /url: /orangehrm/orangehrm-5.7/web/index.php/buzz/viewBuzz
+- banner:
+  - heading "PIM" [level=6]
+  - link "Upgrade":
+    - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: Stoycho Enchev
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - listitem: Configuration 
+      - listitem:
+        - link "Employee List":
+          - /url: "#"
+      - listitem:
+        - link "Add Employee":
+          - /url: "#"
+      - listitem:
+        - link "Reports":
+          - /url: "#"
+      - button ""
+- heading "Employee Information" [level=5]
+- button ""
+- separator
+- text: Employee Name
+- textbox "Type for hints...": John180855228
+- text: Employee Id
+- textbox
+- text: Employment Status -- Select --  Include Current Employees Only  Supervisor Name
+- textbox "Type for hints..."
+- text: Job Title -- Select --  Sub Unit -- Select -- 
+- separator
+- button "Reset"
+- button "Search"
+- button " Add"
+- separator
+- text: No Records Found
+- table:
+  - rowgroup:
+    - row " Id  First (& Middle) Name  Last Name  Job Title  Employment Status  Sub Unit  Supervisor  Actions":
+      - columnheader "":
+        - checkbox ""
+        - text: 
+      - columnheader "Id "
+      - columnheader "First (& Middle) Name "
+      - columnheader "Last Name "
+      - columnheader "Job Title "
+      - columnheader "Employment Status "
+      - columnheader "Sub Unit "
+      - columnheader "Supervisor "
+      - columnheader "Actions"
+  - rowgroup
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+```

@@ -1,0 +1,55 @@
+Error in checkWorkShiftsRecords: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByRole('link', { name: 'Admin' })
+    - waiting for navigation to finish...
+    - navigated to "http://localhost/orangehrm/orangehrm-5.7/web/index.php/auth/login"
+
+    at AdminPage.navigateToAdminPage (C:\MentorCruise\OrangeHRM_TypeScript\pages\AdminPage.ts:106:32)
+    at AdminPage.checkWorkShiftsRecords (C:\MentorCruise\OrangeHRM_TypeScript\pages\AdminPage.ts:251:24)
+    at C:\MentorCruise\OrangeHRM_TypeScript\tests\adminPage.spec.ts:394:32 {
+  [Symbol(step)]: {
+    stepId: 'pw:api@15',
+    location: {
+      file: 'C:\\MentorCruise\\OrangeHRM_TypeScript\\pages\\AdminPage.ts',
+      line: 106,
+      column: 32,
+      function: 'AdminPage.navigateToAdminPage'
+    },
+    category: 'pw:api',
+    title: "Click getByRole('link', { name: 'Admin' })",
+    apiName: 'locator.click',
+    params: {
+      selector: 'internal:role=link[name="Admin"i]',
+      strict: true,
+      timeout: 0
+    },
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@15',
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1755501642293,
+    error: {
+      message: 'Error: locator.click: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByRole('link', { name: 'Admin' })\x1B[22m\n" +
+        '\x1B[2m    - waiting for navigation to finish...\x1B[22m\n' +
+        '\x1B[2m    - navigated to "http://localhost/orangehrm/orangehrm-5.7/web/index.php/auth/login"\x1B[22m\n',
+      stack: 'Error: locator.click: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        "\x1B[2m  - waiting for getByRole('link', { name: 'Admin' })\x1B[22m\n" +
+        '\x1B[2m    - waiting for navigation to finish...\x1B[22m\n' +
+        '\x1B[2m    - navigated to "http://localhost/orangehrm/orangehrm-5.7/web/index.php/auth/login"\x1B[22m\n' +
+        '\n' +
+        '    at AdminPage.navigateToAdminPage (C:\\MentorCruise\\OrangeHRM_TypeScript\\pages\\AdminPage.ts:106:32)\n' +
+        '    at AdminPage.checkWorkShiftsRecords (C:\\MentorCruise\\OrangeHRM_TypeScript\\pages\\AdminPage.ts:251:24)\n' +
+        '    at C:\\MentorCruise\\OrangeHRM_TypeScript\\tests\\adminPage.spec.ts:394:32',
+      cause: undefined
+    }
+  }
+}

@@ -27,14 +27,31 @@ After(async function () {
   }
 });
 
-Given('Admin is on Termination Reasons', async function () {
+Given('Admin is on Custom Fields', async function () {
   await pimPage.navigateToPimPage();
+  await pimPage.configurationButton.click();
+  await pimPage.customFieldsButton.click();
 });
 
-When('Admin adds a new Termination Reason', async function () {
-  await pimPage.addTerminationReason();
+When('Admin adds a new DropDown Custom Field', async function (dataTable) {
+  const rows = dataTable.hashes();
+  for (const row of rows) {
+    await pimPage.addDropdownCustomField(
+      row['Field Name'],
+      row['Screen'],
+      row['Select Options']
+    );
+  }
 });
 
-Then('the termination reason is created successfully', async function () {
+When('Admin adds a new Text or Number Custom Field', async function (dataTable) {
+  const rows = dataTable.hashes();
+  for (const row of rows) {
+    await pimPage.addTextOrNumberCustomField(row['Field Name'], row['Screen']);
+  }
+});
+
+Then('the custom field is created successfully', async function () {
   await expect(pimPage.successButton).toBeVisible();
 });
+

@@ -20,12 +20,16 @@ export class PimPage {
     terminationReasonsButton: Locator;
     addButton: Locator;
     nameField: Locator;
-    terminationSaveButton: Locator;
+    genericSaveButton: Locator;
     successButton: Locator;
     terminationReason: Locator;
     deleteButton: Locator;
     successDelete: Locator;
-
+    customFieldsButton: Locator;
+    customNameFieldInput: Locator;
+    screenCustomField: Locator;
+    typeCustomField: Locator;
+    selectOptionsInput: Locator;
     constructor(page: Page) {
         this.page = page;
         this.pimBtn = page.getByRole('link', { name: 'PIM' });
@@ -48,12 +52,24 @@ export class PimPage {
         this.terminationReasonsButton = page.getByRole('menuitem', { name: 'Termination Reasons' });
         this.addButton = page.getByRole('button', { name: ' Add' });
         this.nameField = page.locator('form').getByRole('textbox');
-        this.terminationSaveButton = page.getByRole('button', { name: ' Save ' });
+        this.genericSaveButton = page.getByRole('button', { name: ' Save ' });
         this.successButton = page.getByText('SuccessSuccessfully Saved×');
         this.terminationReason = page.getByRole('row', { name: ' Test_Termination  ' }).getByRole('button').first();
         this.deleteButton = page.getByRole('button', { name: ' Yes, Delete' });
         this.successDelete = page.getByText('SuccessSuccessfully Deleted×');
-        
+        this.customFieldsButton = page.getByRole('menuitem', { name: 'Custom Fields' });
+        this.customNameFieldInput = page.locator('.oxd-input-group')
+  .filter({ has: page.getByText('Field Name') })
+  .locator('input.oxd-input');
+        this.screenCustomField = page.locator('.oxd-input-group')
+  .filter({ has: page.getByText('Screen') })
+  .locator('.oxd-select-text-input');
+        this.typeCustomField = page.locator('.oxd-input-group')
+  .filter({ has: page.getByText('Type') })
+  .locator('.oxd-select-text-input');
+        this.selectOptionsInput = page.locator('.oxd-input-group')
+            .filter({ has: page.getByText('Select Options') })
+            .locator('input.oxd-input');
     }
 
     async navigateToPimPage(): Promise<void> {
@@ -68,20 +84,53 @@ export class PimPage {
     await this.terminationReason.click();
     await this.deleteButton.click();
     }
+
+    async fillNameField(reason?: string): Promise<void> {
+        const uniqueReason = reason ?? this.generateShortString('Termination_', 20);
+        await this.nameField.fill(uniqueReason);
+    }
+
+    async fillFieldNameCustomField(fieldName?: string): Promise<void> {
+        await this.customNameFieldInput.fill(fieldName ?? '');
+    }
+
     async addTerminationReason(reason?: string): Promise<void> {
-    const uniqueReason = reason ?? this.generateShortString('Termination_', 20);
     await this.configurationButton.click();
     await this.terminationReasonsButton.click();
     await this.addButton.click();
-    await this.nameField.fill(uniqueReason);
-    await this.terminationSaveButton.click();
+    await this.fillNameField(reason);
+    await this.genericSaveButton.click();
 }
-    
+
+    async addDropdownCustomField(fieldName: string, screen: string, options: string): Promise<void> {
+        await this.configurationButton.click();
+        await this.customFieldsButton.click();
+        await this.addButton.click();
+        await this.fillFieldNameCustomField(fieldName);
+        await this.screenCustomField.click();
+        await this.page.getByRole('option', { name: screen }).click();
+        await this.typeCustomField.click();
+        await this.page.getByRole('option', { name: 'Drop Down' }).click();
+        await this.selectOptionsInput.fill(options);
+        await this.genericSaveButton.click();
+    }
+
+    async addTextOrNumberCustomField(fieldName: string, screen: string): Promise<void> {
+        await this.configurationButton.click();
+        await this.customFieldsButton.click();
+        await this.addButton.click();
+        await this.fillFieldNameCustomField(fieldName);
+        await this.screenCustomField.click();
+        await this.page.getByRole('option', { name: screen }).click();
+        await this.typeCustomField.click();
+        await this.page.getByRole('option', { name: 'Text or Number' }).click();
+        await this.genericSaveButton.click();
+    }
 
     async PimPageAddEmployee(
     firstName: string = "UI",
     middleName: string = "UIev",
-    lastName: string = "UIeeevv",
+    lastName: string = "UIeeev",
     employeeId?: string
 ): Promise<void> {
     const uniqueId = employeeId ?? `ID${Date.now().toString().slice(-5)}`;

@@ -41,6 +41,8 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "esModuleInterop": true,
-         // <-- Added for ES module
-  }
+    "noEmit": true
+
+  },
+   "include": ["features/**/*.ts", "pages/**/*.ts"]
 }

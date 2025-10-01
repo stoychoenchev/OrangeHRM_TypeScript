@@ -12,7 +12,7 @@ let loginPage: LoginPage;
 
 setDefaultTimeout(60 * 1000);
 
-Before(async function (this: { [key: string]: any }) {
+Before(async function () {
   browser = await chromium.launch({ headless: true });
   page = await browser.newPage();
   loginPage = new LoginPage(page);
@@ -21,7 +21,7 @@ Before(async function (this: { [key: string]: any }) {
   pimPage = new PimPage(page);
 });
 
-After(async function (this: { [key: string]: any }) {
+After(async function () {
   if (browser) {
     await browser.close();
   }

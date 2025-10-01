@@ -12,7 +12,7 @@ let loginPage: LoginPage;
 
 setDefaultTimeout(60 * 1000);
 
-Before({ tags: '@customfields' }, async function () {
+Before({ tags: '@customfields' }, async function (this: any) {
   browser = await chromium.launch({ headless: true });
   page = await browser.newPage();
   loginPage = new LoginPage(page);
@@ -21,10 +21,11 @@ Before({ tags: '@customfields' }, async function () {
   pimPage = new PimPage(page);
 });
 
-After({ tags: '@customfields' }, async function () {
+After({ tags: '@customfields' }, async function (this: any) {
   if (browser && pimPage) {
     await pimPage.deleteAllCustomFields();
     await expect(pimPage.successDelete).toBeVisible({ timeout: 10000 });
+    await browser.close();
   }
 });
 

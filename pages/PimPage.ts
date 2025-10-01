@@ -1,4 +1,5 @@
 import type { Page, Locator } from '@playwright/test';
+import path from 'path';
 
 export class PimPage {
     page: Page;
@@ -21,7 +22,7 @@ export class PimPage {
     addButton: Locator;
     nameField: Locator;
     genericSaveButton: Locator;
-    successButton: Locator;
+    successAssertion: Locator;
     terminationReason: Locator;
     deleteButton: Locator;
     successDelete: Locator;
@@ -30,6 +31,16 @@ export class PimPage {
     screenCustomField: Locator;
     typeCustomField: Locator;
     selectOptionsInput: Locator;
+    deleteCheckBox: Locator;
+    deleteSelectedBtn: Locator;
+    yesDeleteBtn: Locator;
+    optionalFieldsButton: Locator;
+    dataImportButton: Locator;
+    reportingMethodsButton: Locator;
+    showDeprecatedFields: Locator;
+    browseButton: Locator;
+    uploadButton: Locator;
+    successUploadMsg: Locator;
     constructor(page: Page) {
         this.page = page;
         this.pimBtn = page.getByRole('link', { name: 'PIM' });
@@ -49,15 +60,18 @@ export class PimPage {
         this.employeeNameFilled = page.getByRole('option').first();
         this.searchButton = page.getByRole('button', { name: 'Search' });
         this.configurationButton = page.getByRole('listitem').filter({ hasText: 'Configuration' });
+        this.optionalFieldsButton = page.getByRole('menuitem', { name: 'Optional Fields' });
         this.terminationReasonsButton = page.getByRole('menuitem', { name: 'Termination Reasons' });
         this.addButton = page.getByRole('button', { name: ' Add' });
         this.nameField = page.locator('form').getByRole('textbox');
         this.genericSaveButton = page.getByRole('button', { name: ' Save ' });
-        this.successButton = page.getByText('SuccessSuccessfully Saved×');
+        this.successAssertion = page.getByText('SuccessSuccessfully Saved×');
         this.terminationReason = page.getByRole('row', { name: ' Test_Termination  ' }).getByRole('button').first();
         this.deleteButton = page.getByRole('button', { name: ' Yes, Delete' });
         this.successDelete = page.getByText('SuccessSuccessfully Deleted×');
         this.customFieldsButton = page.getByRole('menuitem', { name: 'Custom Fields' });
+        this.dataImportButton = page.getByRole('menuitem', { name: 'Data Import' });
+        this.reportingMethodsButton = page.getByRole('menuitem', { name: 'Reporting Methods' });
         this.customNameFieldInput = page.locator('.oxd-input-group')
   .filter({ has: page.getByText('Field Name') })
   .locator('input.oxd-input');
@@ -70,6 +84,13 @@ export class PimPage {
         this.selectOptionsInput = page.locator('.oxd-input-group')
             .filter({ has: page.getByText('Select Options') })
             .locator('input.oxd-input');
+        this.deleteCheckBox = page.getByRole('columnheader', { name: '' });
+        this.deleteSelectedBtn = page.getByRole('button', { name: ' Delete Selected ' });
+        this.yesDeleteBtn = page.getByRole('button', { name: ' Yes, Delete ' });
+        this.showDeprecatedFields = page.locator('form div').filter({ hasText: 'Show Deprecated Fields' }).locator('span');
+        this.browseButton = page.locator('div.oxd-file-button', { hasText: 'Browse' });
+        this.uploadButton = page.getByRole('button', { name: /upload/i });
+        this.successUploadMsg = page.locator('p.orangehrm-success-message', { hasText: /Successfully Imported/i });
     }
 
     async navigateToPimPage(): Promise<void> {
@@ -78,8 +99,22 @@ export class PimPage {
     }
 
     async navigateToTerminationReasons(): Promise<void> {
-          await this.page.goto("http://localhost/orangehrm/orangehrm-5.7/web/index.php/pim/viewTerminationReasons")
+          await this.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewTerminationReasons")
     }
+
+    async uploadFile(fileName: string): Promise<void> {
+
+        const filePath = path.resolve('data', fileName);
+        console.log('Uploading file from:', filePath);
+        const [fileChooser] = await Promise.all([
+        this.page.waitForEvent('filechooser'), 
+        this.browseButton.click(),           
+    ]);
+
+    await fileChooser.setFiles(filePath);      // attach file
+    await this.uploadButton.click();           // click upload
+    }
+
     async deleteTerminationReason(): Promise<void> {
     await this.terminationReason.click();
     await this.deleteButton.click();
@@ -126,6 +161,17 @@ export class PimPage {
         await this.page.getByRole('option', { name: 'Text or Number' }).click();
         await this.genericSaveButton.click();
     }
+
+ 
+    async deleteAllCustomFields() {
+        await this.navigateToPimPage();
+        await this.configurationButton.click();
+        await this.customFieldsButton.click();
+        await this.deleteCheckBox.click();
+        await this.deleteSelectedBtn.click();
+        await this.yesDeleteBtn.click();
+  }
+
 
     async PimPageAddEmployee(
     firstName: string = "UI",

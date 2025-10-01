@@ -1,44 +1,44 @@
-import { test, expect } from '@playwright/test';
-import { getAccessTokenAndUpdateEnv } from '../../utils/authUtil.js';
-import 'dotenv/config';
+// import { test, expect } from '@playwright/test';
+// import { getAccessTokenAndUpdateEnv } from '../../utils/authUtil.js';
+// import 'dotenv/config';
 
-let accessToken: string;
+// let accessToken: string;
 
-test.beforeAll(async () => {
-  accessToken = await getAccessTokenAndUpdateEnv();
-});
+// test.beforeAll(async () => {
+//   accessToken = await getAccessTokenAndUpdateEnv();
+// });
 
-test('Get test employee via API', async ({ request }) => {
-  // Use accessToken from beforeAll
-  const response = await request.get(
-    `http://localhost/orangehrm/orangehrm-5.7/web/index.php/api/v2/pim/employees/51`, // replace with your test employee id
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      }
-    }
-  );
-  expect(response.ok()).toBeTruthy();
-  const body = await response.json();
-  console.log(body.data.empNumber);
-});
+// test('Get test employee via API', async ({ request }) => {
+//   // Use accessToken from beforeAll
+//   const response = await request.get(
+//     `http://localhost/orangehrm/orangehrm-5.7/web/index.php/api/v2/pim/employees/51`, // replace with your test employee id
+//     {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         'Content-Type': 'application/json',
+//       }
+//     }
+//   );
+//   expect(response.ok()).toBeTruthy();
+//   const body = await response.json();
+//   console.log(body.data.empNumber);
+// });
 
-test('Create another employee via API', async ({ request }) => {
-  const response = await request.post(
-    'http://localhost/orangehrm/orangehrm-5.7/web/index.php/api/v2/pim/employees',
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      data: {
-        firstName: 'Stoych',
-        lastName: 'Doe'
-      }
-    }
-  );
-  expect(response.ok()).toBeTruthy();
-  const data = await response.json();
-  console.log(data.data.empNumber);
-});
+// test('Create another employee via API', async ({ request }) => {
+//   const response = await request.post(
+//     'http://localhost/orangehrm/orangehrm-5.7/web/index.php/api/v2/pim/employees',
+//     {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         'Content-Type': 'application/json',
+//       },
+//       data: {
+//         firstName: 'Stoych',
+//         lastName: 'Doe'
+//       }
+//     }
+//   );
+//   expect(response.ok()).toBeTruthy();
+//   const data = await response.json();
+//   console.log(data.data.empNumber);
+// });

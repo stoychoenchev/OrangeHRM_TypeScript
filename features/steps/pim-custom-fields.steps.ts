@@ -12,8 +12,8 @@ let loginPage: LoginPage;
 
 setDefaultTimeout(60 * 1000);
 
-Before(async function () {
-  browser = await chromium.launch({ headless: false });
+Before({ tags: '@customfields' }, async function () {
+  browser = await chromium.launch({ headless: true });
   page = await browser.newPage();
   loginPage = new LoginPage(page);
   await loginPage.navigateToPage();
@@ -21,11 +21,13 @@ Before(async function () {
   pimPage = new PimPage(page);
 });
 
-After(async function () {
-  if (browser) {
-    await browser.close();
+After({ tags: '@customfields' }, async function () {
+  if (browser && pimPage) {
+    await pimPage.deleteAllCustomFields();
+    await expect(pimPage.successDelete).toBeVisible({ timeout: 10000 });
   }
 });
+
 
 Given('Admin is on Custom Fields', async function () {
   await pimPage.navigateToPimPage();
@@ -44,6 +46,10 @@ When('Admin adds a new DropDown Custom Field', async function (dataTable) {
   }
 });
 
+When('Admin adds a new DropDown Custom Field with {string} on {string} with options {string}', async function (fieldName: string, screen: string, selectOptions: string) {
+  await pimPage.addDropdownCustomField(fieldName, screen, selectOptions);
+});
+
 When('Admin adds a new Text or Number Custom Field', async function (dataTable) {
   const rows = dataTable.hashes();
   for (const row of rows) {
@@ -51,7 +57,11 @@ When('Admin adds a new Text or Number Custom Field', async function (dataTable) 
   }
 });
 
+When('Admin adds a new Text or Number Custom Field with {string} on {string}', async function (fieldName: string, screen: string) {
+  await pimPage.addTextOrNumberCustomField(fieldName, screen);
+});
+
 Then('the custom field is created successfully', async function () {
-  await expect(pimPage.successButton).toBeVisible();
+  await expect(pimPage.successAssertion).toBeVisible();
 });
 

@@ -5,10 +5,10 @@ import type { Browser, Page } from '@playwright/test';
 import { PimPage } from '../../pages/PimPage.js';
 import { LoginPage } from '../../pages/LoginPage.js';
 
-let browser: Browser;
-let page: Page;
-let pimPage: PimPage;
-let loginPage: LoginPage;
+let browser!: Browser;
+let page!: Page;
+let pimPage!: PimPage;
+let loginPage!: LoginPage;
 
 setDefaultTimeout(60 * 1000);
 

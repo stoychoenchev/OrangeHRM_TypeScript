@@ -78,6 +78,11 @@ jobs:
           path: test-results/**/*.webm
           if-no-files-found: ignore
 
+      - name: Debug show custom fields steps
+        run: sed -n '1,80p' features/steps/pim-custom-fields.steps.ts
+      - name: Type check
+        run: npx tsc --noEmit
+
   deploy-report:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: tests

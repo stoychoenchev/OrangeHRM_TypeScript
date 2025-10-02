@@ -23,6 +23,7 @@ jobs:
       - name: Install Playwright browsers (needed for chromium in steps)
         run: npx playwright install --with-deps
 
+      - name: Type check
+        run: npm run typecheck
       - name: Run Cucumber
-        run: >
-          npx cucumber-js --config cucumber.mjs
+        run: npm run bdd

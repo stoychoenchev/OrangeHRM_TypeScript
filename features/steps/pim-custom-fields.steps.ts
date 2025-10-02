@@ -2,13 +2,13 @@ import { Given, When, Then, setDefaultTimeout, Before, After } from '@cucumber/c
 import { expect } from '@playwright/test';
 import { chromium } from '@playwright/test';
 import type { Browser, Page } from '@playwright/test';
-import { PimPage } from '../../pages/PimPage.js';
-import { LoginPage } from '../../pages/LoginPage.js';
+import { PimPage } from '../../pages/PimPage';
+import { LoginPage } from '../../pages/LoginPage';
 
-let browser!: Browser;
-let page!: Page;
-let pimPage!: PimPage;
-let loginPage!: LoginPage;
+let browser: Browser;
+let page: Page;
+let pimPage: PimPage;
+let loginPage: LoginPage;
 
 setDefaultTimeout(60 * 1000);
 

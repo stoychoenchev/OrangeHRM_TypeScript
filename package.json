@@ -1,16 +1,15 @@
 {
   "name": "orangehrm_typescript",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
-  "scripts": {
-    "regression": "npx playwright test",
-    "bdd": "cucumber-js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "description": "Test Automation Framework for OrangeHRM built with JavaScript and Playwright.",
+  "license": "ISC",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "bdd": "cucumber-js --config cucumber.cjs",
+    "test:bdd": "npm run typecheck && npm run bdd",
+    "regression": "npx playwright test"
+  },
   "devDependencies": {
     "@cucumber/cucumber": "^11.3.0",
     "@playwright/test": "^1.55.0",

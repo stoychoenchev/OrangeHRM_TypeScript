@@ -2,8 +2,8 @@ import { Given, When, Then, setDefaultTimeout, Before, After } from '@cucumber/c
 import { expect } from '@playwright/test';
 import { chromium } from '@playwright/test';
 import type { Browser, Page } from '@playwright/test';
-import { PimPage } from '../../pages/PimPage.js';
-import { LoginPage } from '../../pages/LoginPage.js';
+import { PimPage } from '../../pages/PimPage';
+import { LoginPage } from '../../pages/LoginPage';
 
 let browser: Browser;
 let page: Page;
@@ -13,7 +13,7 @@ let loginPage: LoginPage;
 setDefaultTimeout(60 * 1000);
 
 Before(async function () {
-  browser = await chromium.launch({ headless: false });
+  browser = await chromium.launch({ headless: true });
   page = await browser.newPage();
   loginPage = new LoginPage(page);
   await loginPage.navigateToPage();
@@ -27,14 +27,16 @@ After(async function () {
   }
 });
 
-Given('Admin is on Termination Reasons', async function () {
+Given('Admin is on Data Import', async function () {
   await pimPage.navigateToPimPage();
+  await pimPage.configurationButton.click();
+  await pimPage.dataImportButton.click();
 });
 
-When('Admin adds a new Termination Reason', async function () {
-  await pimPage.addTerminationReason();
+When('Admin uploads file {string}', async function (fileName: string) {
+  await pimPage.uploadFile(fileName);
 });
 
-Then('the termination reason is created successfully', async function () {
-  await expect(pimPage.successButton).toBeVisible();
+Then('all employees from the file should appear in the Employee List', async function () {
+  await expect(pimPage.successUploadMsg).toHaveText(/Successfully Imported/i, { timeout: 10000 });
 });

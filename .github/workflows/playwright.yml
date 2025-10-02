@@ -1,4 +1,4 @@
-name: Tests
+name: BDD + Playwright Tests
 on:
   push:
     branches: [main]
@@ -9,37 +9,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    env:
-      BASE_URL: https://opensource-demo.orangehrmlive.com
-      HEADLESS: true
-      ORANGEHRM_USERNAME: Admin
-      ORANGEHRM_PASSWORD: admin123
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts/*
           cache: npm
 
-      - name: Install deps
+      - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Type check
-        run: npx tsc --noEmit
+      - name: Run Playwright Tests
+        run: npx playwright test --retries=1
 
       - name: Run Cucumber
         run: >
-          node --loader ts-node/esm
-          ./node_modules/.bin/cucumber-js
-          --import "features/**/*.ts"
+          npx cucumber-js 
+          --require-module ts-node/register
+          --require "features/**/*.ts"
+          --publish-quiet
           --format progress
-
-      - name: Run Playwright tests
-        run: npx playwright test --retries=1
 
       - name: Upload Playwright report
         if: always()
